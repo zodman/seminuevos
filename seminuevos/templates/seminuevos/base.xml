@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<adf>
+    <prospect>
+        <requestdate>2015-10-20ECT05:10:36-05:10</requestdate>
+        <vehicle status="USED">
+            <year>2012</year>
+            <make>BMW</make>
+            <model>120i</model>
+            <bodystyle>Hatchback (3 Puertas)</bodystyle>
+            <transmission>Autom&#xE1;tica</transmission>
+            <odometer units="Kms." status="unknown">6900</odometer>
+            <colorcombination>
+                <exteriorcolor>Rojo</exteriorcolor>
+            </colorcombination>
+            <price currency="USD">48000</price>
+            <comments></comments>
+        </vehicle>
+        <customer>
+            <contact>
+                <name part="full">Chan1</name>
+                <phone>232321</phone>
+                <email>mail11@hotmail.com</email>
+            </contact>
+            <comments>http://ptdev.com/ptx/vehicle/784 | mensaje de estoy interesado11????</comments>
+        </customer>
+        <vendor>
+            <id source="seminuevos">10</id>
+            <vendorname>Andar Motors</vendorname>
+            <contact>
+                <name part="full"> </name><email/>
+                <phone type="voice">(591)3 3452665</phone>
+                <address>
+                    <street line="1">Av. Marcelo Tercero Banzer No.358</street>
+                    <city>Santa Cruz</city>
+                </address>
+            </contact>
+            <urlReply></urlReply>
+        </vendor>
+        <provider>
+            <name>Motorweb - seminuevos</name>
+            <url>http://ptdev.com</url>
+        </provider>
+    </prospect>
+</adf>
