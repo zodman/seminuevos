@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # made by Sergio Dzul
-from ConfigParser import SafeConfigParser
-from urllib import urlencode
+from urllib.parse import urlencode
 import json
 import os
 import re
@@ -11,13 +10,14 @@ import requests
 from .ssl_helper import SSLAdapter
 from django.conf import settings
 import logging
-
+from configparser import SafeConfigParser
 log = logging.getLogger('core')
 
 
 class SDK(object):
 
     def __init__(self, client_id='testAccount', client_secret='testPass123'):
+
         self.client_id = client_id
         self.client_secret = client_secret
 

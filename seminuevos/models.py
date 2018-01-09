@@ -72,7 +72,7 @@ class State(models.Model):
     id = models.IntegerField(primary_key=True)
     region = models.CharField(max_length=50, blank=True, null=True)
     name = models.CharField(max_length=250)
-    country = models.ForeignKey(Country, related_name='states')
+    country = models.ForeignKey(Country, related_name='states', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Estado'
@@ -88,7 +88,7 @@ class State(models.Model):
 class City(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=250)
-    state = models.ForeignKey(State, related_name="cities")
+    state = models.ForeignKey(State, related_name="cities", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Ciudad'
