@@ -67,6 +67,9 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
+def __str__(self):
+        return self.name
+
 
 class State(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -82,6 +85,8 @@ class State(models.Model):
         return u'%s %s - %s' % (self.id, self.name, self.cities.count())
 
     def __unicode__(self):
+        return self.name
+    def __str__(self):
         return self.name
 
 
@@ -100,3 +105,6 @@ class City(models.Model):
 
     def __unicode__(self):
         return self.name
+    def __str__(self):
+        return self.name
+
