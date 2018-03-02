@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import SemiAccount
 
-# Register your models here.
+
+admin.site.register(SemiAccount)
