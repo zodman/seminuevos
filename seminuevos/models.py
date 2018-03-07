@@ -109,6 +109,14 @@ class City(models.Model):
 
     def __unicode__(self):
         return self.name
+
     def __str__(self):
         return self.name
+
+
+def get_colors():
+    sm = SemiApp(SM_USER, SM_PASSWORD)
+    resp = sm.get("catalog/search-colors")
+    data = resp.json().get("data")
+    return data
 
