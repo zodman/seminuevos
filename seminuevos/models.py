@@ -11,14 +11,13 @@ from .settings import SM_USER, SM_PASSWORD
 class SemiAccount(models.Model):
     dealer_id = models.CharField(max_length=150, verbose_name='ID Dealer')
     dealer_user_id = models.CharField(max_length=150, verbose_name='ID Dealer User')
-    user = models.OneToOneField(User, related_name="semi_account", verbose_name="Cuenta de SEMI" )
 
     class Meta:
         verbose_name ='cuenta de seminuevos'
         verbose_name_plural = 'cuentas de seminuevos'
 
     def __str__(self):
-        return "{}".format(self.user)
+        return "{}".format(self.id)
 
     def __unicode__(self):
         return self.__str__()
