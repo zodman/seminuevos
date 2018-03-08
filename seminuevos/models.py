@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.contrib.auth.models import User
 from django.db import models
 # from django.conf import settings
 from seminuevos.sdk.semi_sdk import SDK as SemiApp
 from .enums import STATUS_SOLD
 from .settings import SM_USER, SM_PASSWORD
 
+
 # Create your models here.
 class SemiAccount(models.Model):
     dealer_id = models.CharField(max_length=150, verbose_name='ID Dealer')
-    dealer_user_id = models.CharField(max_length=150, verbose_name='ID Dealer User')
+    dealer_user_id = models.CharField(max_length=150,
+                                      verbose_name='ID Dealer User')
 
     class Meta:
-        verbose_name ='cuenta de seminuevos'
+        verbose_name = 'cuenta de seminuevos'
         verbose_name_plural = 'cuentas de seminuevos'
 
     def __str__(self):
@@ -24,20 +25,11 @@ class SemiAccount(models.Model):
 
     @property
     def client_id(self):
-        return  SM_USER
-   
+        return SM_USER
+
     @property
     def client_secret(self):
         return SM_PASSWORD
-
-    @property
-    def client_id(self):
-        return  SM_USER
-    @property
-    def client_secret(self):
-        return SM_PASSWORD
-
-
 
     @property
     def user_semiapp(self):
@@ -71,7 +63,7 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
-def __str__(self):
+    def __str__(self):
         return self.name
 
 
@@ -79,7 +71,8 @@ class State(models.Model):
     id = models.IntegerField(primary_key=True)
     region = models.CharField(max_length=50, blank=True, null=True)
     name = models.CharField(max_length=250)
-    country = models.ForeignKey(Country, related_name='states', on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, related_name='states',
+                                on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Estado'
@@ -90,6 +83,7 @@ class State(models.Model):
 
     def __unicode__(self):
         return self.name
+
     def __str__(self):
         return self.name
 
@@ -97,7 +91,8 @@ class State(models.Model):
 class City(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=250)
-    state = models.ForeignKey(State, related_name="cities", on_delete=models.CASCADE)
+    state = models.ForeignKey(State, related_name="cities",
+                              on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Ciudad'
@@ -105,7 +100,8 @@ class City(models.Model):
         ordering = ('name',)
 
     def info(self):
-        return u'(%s %s) %s %s' % (self.state_id, self.state.name, self.id, self.name)
+        return u'(%s %s) %s %s' % (self.state_id, self.state.name, self.id,
+                                   self.name)
 
     def __unicode__(self):
         return self.name
@@ -114,9 +110,30 @@ class City(models.Model):
         return self.name
 
 
+def get_subtypes(vehicle_type_id=1):
+    sm = SemiApp(SM_USER, SM_PASSWORD)
+    resp = sm.get("search/vehicle-search/subtype/{}".format(vehicle_type_id))
+    data = resp.json().get("data")
+    return data
+
+
+def get_brands(vehicle_type_id=1):
+    sm = SemiApp(SM_USER, SM_PASSWORD)
+    resp = sm.get("search/vehicle-search/brand/{}".format(vehicle_type_id))
+    data = resp.json().get("data")
+    return data
+
+
 def get_colors():
     sm = SemiApp(SM_USER, SM_PASSWORD)
     resp = sm.get("catalog/search-colors")
+    data = resp.json().get("data")
+    return data
+
+
+def get_models(brand=""):
+    sm = SemiApp(SM_USER, SM_PASSWORD)
+    resp = sm.get("search/vehicle-search/all-models/{}".format(brand))
     data = resp.json().get("data")
     return data
 

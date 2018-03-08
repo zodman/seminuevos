@@ -3,3 +3,5 @@ from .models import SemiAccount
 
 
 admin.site.register(SemiAccount)
+
+
