@@ -17,7 +17,7 @@ log = logging.getLogger('core')
 class SDK(object):
 
     def __init__(self, client_id='testAccount', client_secret='testPass123'):
-
+        self.timeout=6
         self.client_id = client_id
         self.client_secret = client_secret
 
@@ -54,7 +54,8 @@ class SDK(object):
     def get_access_token(self):
         uri = self.API_ROOT_URL+self.auth_url()
         log.debug('url: %s' % uri)
-        response = self._requests.post(uri, params=urlencode({}), headers=self.headers)
+        response = self._requests.post(uri, params=urlencode({}),
+                                       headers=self.headers, timeout=self.timeout)
 
         if response.ok:
             response_info = response.json()
@@ -69,9 +70,12 @@ class SDK(object):
             params = {'access_token': self._access_token}
         uri = self.make_path(path)
         if not headers:
-            response = self._requests.get(uri, params=urlencode(params), headers=self.headers)
+            response = self._requests.get(uri, params=urlencode(params),
+                                          headers=self.headers,  timeout=self.timeout)
         else:
-            response = self._requests.get(uri, params=urlencode(params), headers=headers)
+            response = self._requests.get(uri, params=urlencode(params),
+                                          timeout=self.timeout,
+                                          headers=headers)
         return response
 
     def post(self, path, body=False, params={}):
